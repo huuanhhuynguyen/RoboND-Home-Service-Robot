@@ -1,0 +1,38 @@
+<launch>
+
+    <!-- Map Server -->
+    <arg name="map_file" default="$(find turtlebot)/../map/SimpleMap.yaml" />
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- AMCL Node -->
+    <node name="amcl" pkg="amcl" type="amcl" output="screen">
+        <!-- Tuning values for AMCL, see: http://wiki.ros.org/amcl -->
+        <param name="min_particles" value="25"/>
+        <param name="max_particles" value="5000"/>
+        <param name="update_min_a" value="0.05"/>
+        <param name="update_min_d" value="0.0314"/>
+
+        <param name="odom_frame_id" value="odom"/>
+        <param name="odom_model_type" value="diff-corrected"/>
+        <param name="base_frame_id" value="robot_footprint"/>
+        <param name="global_frame_id" value="map"/>
+
+        <!-- Define initial pose -->
+        <param name="initial_pose_x" value="0"/>
+        <param name="initial_pose_y" value="0"/>
+        <param name="initial_pose_a" value="-1.5707"/>
+    </node>
+
+    <!-- Move Base -->
+    <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+        <param name="base_global_planner" value="navfn/NavfnROS" />
+        <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+
+        <rosparam file="$(find turtlebot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find turtlebot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find turtlebot)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find turtlebot)/config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find turtlebot)/config/base_local_planner_params.yaml" command="load" />
+    </node>
+
+</launch>
