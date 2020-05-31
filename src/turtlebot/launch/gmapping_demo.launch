@@ -5,6 +5,8 @@
         <param name="scan" value="scan" />
         <param name="odom_frame" value="odom" />
         <param name="base_frame" value="robot_footprint" />
+        <param name="angularUpdate" value="0.1" />
+        <param name="linearUpdate" value="0.1"/>
         <!-- Further parameters can be added here.
              Source: http://wiki.ros.org/gmapping
              But I am already happy with the default values! -->
