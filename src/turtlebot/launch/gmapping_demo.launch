@@ -1,0 +1,12 @@
+<!-- launch gmapping with tuned parameters -->
+<launch>
+    <param name="use_sim_time" value="true" />
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" output="screen" >
+        <param name="scan" value="scan" />
+        <param name="odom_frame" value="odom" />
+        <param name="base_frame" value="robot_footprint" />
+        <!-- Further parameters can be added here.
+             Source: http://wiki.ros.org/gmapping
+             But I am already happy with the default values! -->
+    </node>
+</launch>
