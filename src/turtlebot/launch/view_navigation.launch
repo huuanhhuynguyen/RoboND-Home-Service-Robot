@@ -1,0 +1,5 @@
+<!-- launch rviz with a saved config file -->
+<launch>
+    <node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find turtlebot)/../rvizConfig/default.rviz"/>
+</launch>
