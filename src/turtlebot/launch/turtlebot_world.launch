@@ -13,7 +13,7 @@
     <include file="$(find turtlebot)/launch/robot_description.launch"/>
 
     <!-- World File -->
-    <arg name="world_file" default="$(find turtlebot)/worlds/Simple.world"/>
+    <arg name="world_file" default="$(find turtlebot)/../map/Simple.world"/>
 
     <!-- Launch Gazebo World -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
