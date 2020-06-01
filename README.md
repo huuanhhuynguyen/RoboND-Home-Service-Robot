@@ -45,7 +45,7 @@ $ sudo apt-get install ros-${ROS_DISTRO}-move-base
 $ rosdep install gmapping
 ```
 
-4. Within the `catkin_ws`folder, build the project
+4. Navigate back to the `catkin_ws`folder and build the project
 ```
 $ catkin_make
 ```
