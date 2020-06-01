@@ -31,8 +31,8 @@
 #include "nav_msgs/Odometry.h"
 #include <cmath>
 
-double pickUpPos[2]  = {2, -11};
-double dropOffPos[2] = {6, -11};
+double pickUpPos[2]  = {7.5, -10.0};
+double dropOffPos[2] = {17.3, -3.7};
 
 double pose[2] = {0, 0};  // current pose
 
