@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   move_base_msgs
+  visualization_msgs
   roscpp
 )
 

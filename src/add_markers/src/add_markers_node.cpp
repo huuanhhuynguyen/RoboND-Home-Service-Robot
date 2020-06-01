@@ -42,12 +42,21 @@ void get_current_pose(const nav_msgs::Odometry::ConstPtr& msg)
   pose[1] = msg->pose.pose.position.y;
 }
 
-bool reach_goal(double goalPos[2])
+double distToCurrentPos(double goalPos[2])
 {
   double dx = goalPos[0] - pose[0];
   double dy = goalPos[1] - pose[1];
-  double dist = sqrt(dx*dx + dy*dy);
-  return dist < 0.8;
+  return sqrt(dx*dx + dy*dy);
+}
+
+bool reach_pick_up()
+{
+  return distToCurrentPos(pickUpPos) < 0.8;
+}
+
+bool reach_drop_zone()
+{
+  return distToCurrentPos(dropOffPos) < 0.2;
 }
 
 int main( int argc, char** argv )
@@ -118,24 +127,26 @@ int main( int argc, char** argv )
       marker.pose.position.x = pickUpPos[0];
       marker.pose.position.y = pickUpPos[1];
       marker_pub.publish(marker);
-      if (reach_goal(pickUpPos)) {
+      if (reach_pick_up()) {
         sleep(5);
         ROS_INFO("Carrying to drop zone ... ");
         state = State::CARRY;
       }
     }
     else if (state == State::CARRY) {
-      marker.action = visualization_msgs::Marker::ADD;
+      marker.action = visualization_msgs::Marker::DELETE;
       marker.pose.position.x = dropOffPos[0];
       marker.pose.position.y = dropOffPos[1];
       marker_pub.publish(marker);
-      if (reach_goal(dropOffPos)) {
+      if (reach_drop_zone()) {
         ROS_INFO("Reached drop zone. ");
         state = State::DROP;
       }
     }
     else /* state == State::DROP */ {
       marker.action = visualization_msgs::Marker::ADD;
+      marker.pose.position.x = dropOffPos[0];
+      marker.pose.position.y = dropOffPos[1];
       marker_pub.publish(marker);
     }
   }
