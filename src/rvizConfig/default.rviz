@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Pose1/Status1
       Splitter Ratio: 0.5
     Tree Height: 269
   - Class: rviz/Selection
@@ -100,6 +99,7 @@ Visualization Manager:
         LaserScan: true
         LocalCostMap: true
         Map: true
+        Marker: true
         Particles: true
         Pose: true
         RobotModel: true
@@ -231,6 +231,14 @@ Visualization Manager:
       Radius: 0.10000000149011612
       Reference Frame: <Fixed Frame>
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /visualization_marker
+      Name: Marker
+      Namespaces:
+        basic_shapes: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -259,16 +267,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 16.556068420410156
+      Distance: 26.051294326782227
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.176558494567871
-        Y: -0.5130923986434937
-        Z: -1.0590983629226685
+        X: 8.651144981384277
+        Y: -5.908228874206543
+        Z: -2.2516677379608154
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
