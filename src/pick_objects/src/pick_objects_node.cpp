@@ -5,7 +5,7 @@
 // Define a client for to send goal requests to the move_base server through a SimpleActionClient
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
-void send_goal_to_move_base(MoveBaseClient & ac, double x, double y, double theta)
+void send_goal_to_move_base(MoveBaseClient & ac, double x, double y, double orient)
 {
   move_base_msgs::MoveBaseGoal goal;
 
@@ -15,7 +15,8 @@ void send_goal_to_move_base(MoveBaseClient & ac, double x, double y, double thet
 
   // Define a position and orientation for the robot to reach
   goal.target_pose.pose.position.x = x;
-  goal.target_pose.pose.orientation.w = y;
+  goal.target_pose.pose.position.y = y;
+  goal.target_pose.pose.orientation.w = orient;
 
   // Send the goal position and orientation for the robot to reach
   ROS_INFO("Sending goal ...");
@@ -43,11 +44,11 @@ int main(int argc, char** argv){
     ROS_INFO("Waiting for the move_base action server to come up");
   }
 
-  send_goal_to_move_base(ac, 1.0, 0.0, 0.0);
+  send_goal_to_move_base(ac, -0.5, -10.0, 0.75);
 
   sleep(5); // simulate the picking up for 5 sec
 
-  send_goal_to_move_base(ac, 1.0, 8.0, 0.0);
+  send_goal_to_move_base(ac,  -0.5, -10.0, 1.5);
 
   return 0;
 }
