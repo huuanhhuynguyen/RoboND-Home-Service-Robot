@@ -6,8 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Particles1
-        - /LocalCostMap1
+        - /Pose1/Status1
       Splitter Ratio: 0.5
     Tree Height: 269
   - Class: rviz/Selection
@@ -95,12 +94,14 @@ Visualization Manager:
       Unreliable: false
       Value: true
       Visibility:
+        Axes: true
         GlobalPlanner: true
         Grid: true
         LaserScan: true
         LocalCostMap: true
         Map: true
         Particles: true
+        Pose: true
         RobotModel: true
         Value: true
       Zoom Factor: 1
@@ -208,6 +209,28 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /move_base/current_goal
+      Unreliable: false
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 1
+      Name: Axes
+      Radius: 0.10000000149011612
+      Reference Frame: <Fixed Frame>
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -243,18 +266,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 5.878294944763184
-        Y: -6.584537982940674
-        Z: -1.69879150390625
+        X: 1.176558494567871
+        Y: -0.5130923986434937
+        Z: -1.0590983629226685
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0453979969024658
+      Pitch: 1.1397963762283325
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.39039841294288635
+      Yaw: 0.660398542881012
     Saved: ~
 Window Geometry:
   Camera:
