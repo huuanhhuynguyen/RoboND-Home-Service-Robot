@@ -28,10 +28,26 @@
  */
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include "nav_msgs/Odometry.h"
+#include <cmath>
 
-void add_marker()
+double pickUpPos[2]  = {2, -11};
+double dropOffPos[2] = {6, -11};
+
+double pose[2] = {0, 0};  // current pose
+
+void get_current_pose(const nav_msgs::Odometry::ConstPtr& msg)
 {
+  pose[0] = msg->pose.pose.position.x;
+  pose[1] = msg->pose.pose.position.y;
+}
 
+bool reach_goal(double goalPos[2])
+{
+  double dx = goalPos[0] - pose[0];
+  double dy = goalPos[1] - pose[1];
+  double dist = sqrt(dx*dx + dy*dy);
+  return dist < 0.8;
 }
 
 int main( int argc, char** argv )
@@ -41,14 +57,22 @@ int main( int argc, char** argv )
   ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
+  ros::Subscriber pose_sub = n.subscribe("odom", 10, get_current_pose);
+
   uint32_t shape = visualization_msgs::Marker::CUBE;
 
-  enum State { PICKUP, HIDE, DROP, } state = PICKUP;
+  enum State {
+    PICKUP,  // going to pick up zon
+    CARRY,   // carry to drop zone
+    DROP,    // already drop
+  } state = PICKUP;
+
+  ROS_INFO("Going to pick up zone ... ");
   while (ros::ok())
   {
     visualization_msgs::Marker marker;
     // Set the frame ID and timestamp.  See the TF tutorials for information on these.
-    marker.header.frame_id = "map";
+    marker.header.frame_id = "odom";
     marker.header.stamp = ros::Time::now();
 
     marker.ns = "basic_shapes";
@@ -66,9 +90,9 @@ int main( int argc, char** argv )
     marker.pose.orientation.z = 0.0;
     marker.pose.orientation.w = 1.0;
 
-    marker.scale.x = 1.0;
-    marker.scale.y = 1.0;
-    marker.scale.z = 1.0;
+    marker.scale.x = 0.5;
+    marker.scale.y = 0.5;
+    marker.scale.z = 0.5;
 
     marker.color.r = 0.0f;
     marker.color.g = 1.0f;
@@ -77,7 +101,7 @@ int main( int argc, char** argv )
 
     marker.lifetime = ros::Duration();
 
-    while (marker_pub.getNumSubscribers() < 1)
+    /*while (marker_pub.getNumSubscribers() < 1)
     {
       if (!ros::ok())
       {
@@ -85,31 +109,34 @@ int main( int argc, char** argv )
       }
       ROS_WARN_ONCE("Please create a subscriber to the marker");
       sleep(1);
-    }
+    }*/
+
+    ros::spinOnce();
 
     if (state == State::PICKUP) {
       marker.action = visualization_msgs::Marker::ADD;
-      marker.pose.position.x = 12;
-      marker.pose.position.y = -11;
+      marker.pose.position.x = pickUpPos[0];
+      marker.pose.position.y = pickUpPos[1];
       marker_pub.publish(marker);
-      ROS_INFO("Picking up ... ");
-      sleep(5);
-      state = State::HIDE;
-    } else if (state == State::HIDE) {
-      marker.action = visualization_msgs::Marker::DELETE;
-      marker_pub.publish(marker);
-      ROS_INFO("Hiding ...");
-      sleep(5);
-      state = State::DROP;
-    } else {
-      marker.action = visualization_msgs::Marker::ADD;
-      marker.pose.position.x = 15;
-      marker.pose.position.y = -8.5;
-      marker_pub.publish(marker);
-      ROS_INFO("Droping out ...");
-      sleep(5);
+      if (reach_goal(pickUpPos)) {
+        sleep(5);
+        ROS_INFO("Carrying to drop zone ... ");
+        state = State::CARRY;
+      }
     }
-
+    else if (state == State::CARRY) {
+      marker.action = visualization_msgs::Marker::ADD;
+      marker.pose.position.x = dropOffPos[0];
+      marker.pose.position.y = dropOffPos[1];
+      marker_pub.publish(marker);
+      if (reach_goal(dropOffPos)) {
+        ROS_INFO("Reached drop zone. ");
+        state = State::DROP;
+      }
+    }
+    else /* state == State::DROP */ {
+      marker.action = visualization_msgs::Marker::ADD;
+      marker_pub.publish(marker);
+    }
   }
-
 }
