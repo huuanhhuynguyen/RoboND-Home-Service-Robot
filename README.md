@@ -4,6 +4,9 @@ In this project, a mobile robot is asked to navigate to a pick-up zone for picki
 up a green cube. After that, it moves while carrying the cube to the drop-off
 zone position and drops the cube there.
 
+<a href="https://www.youtube.com/watch?v=XO9q-1EyGBc" target="_blank">
+<img src="demo.gif" alt="demo video" width="500" height="346"/></a>
+
 ## How it works
 The mobile robot first drives around and scan the house using laser for generating 
 a static map about this place. Having the map, it uses odometry and laser data 
