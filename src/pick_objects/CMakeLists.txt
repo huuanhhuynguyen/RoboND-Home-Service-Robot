@@ -8,7 +8,7 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  action_lib
+  actionlib
   move_base_msgs
   roscpp
 )
