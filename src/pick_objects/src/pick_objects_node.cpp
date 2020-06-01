@@ -2,6 +2,9 @@
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
 
+double pickUpPos[2]  = {2, -11};
+double dropOffPos[2] = {6, -11};
+
 // Define a client for to send goal requests to the move_base server through a SimpleActionClient
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
@@ -10,7 +13,7 @@ void send_goal_to_move_base(MoveBaseClient & ac, double x, double y, double orie
   move_base_msgs::MoveBaseGoal goal;
 
   // set up the frame parameters
-  goal.target_pose.header.frame_id = "map";
+  goal.target_pose.header.frame_id = "odom";
   goal.target_pose.header.stamp = ros::Time::now();
 
   // Define a position and orientation for the robot to reach
@@ -44,11 +47,11 @@ int main(int argc, char** argv){
     ROS_INFO("Waiting for the move_base action server to come up");
   }
 
-  send_goal_to_move_base(ac, -0.5, -10.0, 0.75);
+  send_goal_to_move_base(ac, pickUpPos[0], pickUpPos[1], 0.75);
 
   sleep(5); // simulate the picking up for 5 sec
 
-  send_goal_to_move_base(ac,  -0.5, -10.0, 1.5);
+  send_goal_to_move_base(ac, dropOffPos[0], dropOffPos[1], 1.5);
 
   return 0;
 }
