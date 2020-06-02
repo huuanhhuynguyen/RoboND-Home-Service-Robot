@@ -46,6 +46,7 @@ $ sudo apt-get update && sudo apt-get upgrade -y
 $ sudo apt-get install ros-${ROS_DISTRO}-map-server
 $ sudo apt-get install ros-${ROS_DISTRO}-amcl
 $ sudo apt-get install ros-${ROS_DISTRO}-move-base
+$ sudo apt-get install ros-${ROS_DISTRO}-slam-gmapping
 $ rosdep install gmapping
 $ pip install rospkg
 ```
