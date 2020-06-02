@@ -42,7 +42,7 @@ $ cd src && catkin_init_workspace
 
 3. Install some dependencies (Only need to do once)
 ```
-$ sudo apt-get update && apt-get upgrade -y
+$ sudo apt-get update && sudo apt-get upgrade -y
 $ sudo apt-get install ros-${ROS_DISTRO}-map-server
 $ sudo apt-get install ros-${ROS_DISTRO}-amcl
 $ sudo apt-get install ros-${ROS_DISTRO}-move-base
