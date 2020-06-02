@@ -122,7 +122,7 @@ int main( int argc, char** argv )
 
     ros::spinOnce();
 
-    if (state == State::PICKUP) {
+    if (state == PICKUP) {
       marker.action = visualization_msgs::Marker::ADD;
       marker.pose.position.x = pickUpPos[0];
       marker.pose.position.y = pickUpPos[1];
@@ -130,20 +130,20 @@ int main( int argc, char** argv )
       if (reach_pick_up()) {
         sleep(5);
         ROS_INFO("Carrying to drop zone ... ");
-        state = State::CARRY;
+        state = CARRY;
       }
     }
-    else if (state == State::CARRY) {
+    else if (state == CARRY) {
       marker.action = visualization_msgs::Marker::DELETE;
       marker.pose.position.x = dropOffPos[0];
       marker.pose.position.y = dropOffPos[1];
       marker_pub.publish(marker);
       if (reach_drop_zone()) {
         ROS_INFO("Reached drop zone. ");
-        state = State::DROP;
+        state = DROP;
       }
     }
-    else /* state == State::DROP */ {
+    else /* state == DROP */ {
       marker.action = visualization_msgs::Marker::ADD;
       marker.pose.position.x = dropOffPos[0];
       marker.pose.position.y = dropOffPos[1];
