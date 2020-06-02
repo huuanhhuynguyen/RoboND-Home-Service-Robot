@@ -3,17 +3,11 @@
 #include <visualization_msgs/Marker.h>
 #include <actionlib/client/simple_action_client.h>
 
-double goal[2] = {0, 0};
+double pickUpPos[2]  = {7.5, -10.0};
+double dropOffPos[2] = {17.3, -3.7};
 
 // Define a client for to send goal requests to the move_base server through a SimpleActionClient
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
-
-void get_goal(const visualization_msgs::Marker::ConstPtr& msg)
-{
-  goal[0] = msg->pose.position.x;
-  goal[1] = msg->pose.position.y;
-  ROS_INFO("Update goal %f %f", goal[0], goal[1]);
-}
 
 void send_goal_to_move_base(MoveBaseClient & ac, double x, double y, double orient)
 {
@@ -46,9 +40,6 @@ int main(int argc, char** argv){
   // Initialize the simple_navigation_goals node
   ros::init(argc, argv, "pick_objects");
 
-  ros::NodeHandle n;
-  ros::Subscriber marker_sub = n.subscribe("visualization_marker", 10, get_goal);
-
   //tell the action client that we want to spin a thread by default
   MoveBaseClient ac("move_base", true);
 
@@ -57,15 +48,11 @@ int main(int argc, char** argv){
     ROS_INFO("Waiting for the move_base action server to come up");
   }
 
-  ros::spinOnce();
+  send_goal_to_move_base(ac, pickUpPos[0], pickUpPos[1], 1.0);
 
-  send_goal_to_move_base(ac, goal[0], goal[1], 1.0);
+  sleep(5); // simulate the picking up
 
-  sleep(3); // simulate the picking up
-
-  ros::spinOnce();
-
-  send_goal_to_move_base(ac, goal[0], goal[1], 1.0);
+  send_goal_to_move_base(ac, dropOffPos[0], dropOffPos[1], 1.0);
 
   ROS_INFO("Reached the drop off zone");
 
