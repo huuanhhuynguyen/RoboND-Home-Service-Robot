@@ -46,6 +46,7 @@ $ sudo apt-get install ros-${ROS_DISTRO}-map-server
 $ sudo apt-get install ros-${ROS_DISTRO}-amcl
 $ sudo apt-get install ros-${ROS_DISTRO}-move-base
 $ rosdep install gmapping
+$ pip install rospkg
 ```
 
 4. Navigate back to the `catkin_ws`folder and build the project
