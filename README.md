@@ -27,6 +27,15 @@ and [teleop_twist_keyboard](http://wiki.ros.org/teleop_twist_keyboard).
 2. CMake & g++/gcc, C++11
 3. Install xterm `sudo apt-get install xterm`
 4. Python with pip
+5. Install some dependencies (Only need to do once)
+```
+$ sudo apt-get update && sudo apt-get upgrade -y
+$ sudo apt-get install ros-${ROS_DISTRO}-map-server
+$ sudo apt-get install ros-${ROS_DISTRO}-amcl
+$ sudo apt-get install ros-${ROS_DISTRO}-move-base
+$ sudo apt-get install ros-${ROS_DISTRO}-slam-gmapping
+$ pip install rospkg
+```
 
 ## Setup, Build and Launch
 1. Install Gazebo and ROS(melodic/kinetic) on Linux.
@@ -40,22 +49,12 @@ $ mv RoboND-Home-Service-Robot src
 $ cd src && catkin_init_workspace
 ```
 
-3. Install some dependencies (Only need to do once)
-```
-$ sudo apt-get update && sudo apt-get upgrade -y
-$ sudo apt-get install ros-${ROS_DISTRO}-map-server
-$ sudo apt-get install ros-${ROS_DISTRO}-amcl
-$ sudo apt-get install ros-${ROS_DISTRO}-move-base
-$ sudo apt-get install ros-${ROS_DISTRO}-slam-gmapping
-$ pip install rospkg
-```
-
-4. Navigate back to the `catkin_ws`folder and build the project
+3. Navigate back to the `catkin_ws`folder and build the project
 ```
 $ catkin_make
 ```
 
-7. Run available scripts to launch
+4. Run available scripts to launch
 ```
 $ source devel/setup.bash
 $ chmod u+x ./src/scripts/home_service.sh
