@@ -27,7 +27,7 @@ and [teleop_twist_keyboard](http://wiki.ros.org/teleop_twist_keyboard).
 2. CMake & g++/gcc, C++11
 3. Install xterm `sudo apt-get install xterm`
 4. Python with pip
-5. Install some dependencies (Only need to do once)
+5. Install some dependencies
 ```
 $ sudo apt-get update && sudo apt-get upgrade -y
 $ sudo apt-get install ros-${ROS_DISTRO}-map-server
