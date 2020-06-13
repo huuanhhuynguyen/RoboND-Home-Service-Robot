@@ -26,7 +26,7 @@ and [teleop_twist_keyboard](http://wiki.ros.org/teleop_twist_keyboard).
 1. ROS (Melodic or Kinetic), Gazebo on Linux
 2. CMake & g++/gcc, C++11
 3. Install xterm `sudo apt-get install xterm`
-4. Python with pip
+4. Python with pip `sudo apt-get install python-pip`
 5. Install some dependencies
 ```
 $ sudo apt-get update && sudo apt-get upgrade -y
