@@ -22,7 +22,7 @@ The project consists of the following parts:
 [slam-gmapping](http://wiki.ros.org/slam_gmapping) 
 and [teleop_twist_keyboard](http://wiki.ros.org/teleop_twist_keyboard).
 
-## Prequisites
+## Prerequisites
 1. ROS (Melodic or Kinetic), Gazebo on Linux
 2. CMake & g++/gcc, C++11
 3. Install xterm `sudo apt-get install xterm`
@@ -37,10 +37,9 @@ $ sudo apt-get install ros-${ROS_DISTRO}-slam-gmapping
 $ pip install rospkg
 ```
 
-## Setup, Build and Launch
-1. Install Gazebo and ROS(melodic/kinetic) on Linux.
+## Build and Launch
 
-2. Clone the project in a catkin workspace
+1. Clone the project and initialize a catkin workspace
 ```
 $ mkdir catkin_ws && cd catkin_ws
 $ git clone https://github.com/huuanhhuynguyen/RoboND-Home-Service-Robot.git
@@ -48,13 +47,13 @@ $ mv RoboND-Home-Service-Robot src
 $ cd src && catkin_init_workspace
 ```
 
-3. Navigate back to the `catkin_ws`folder and build the project
+2. Navigate back to the `catkin_ws`folder and build the project
 ```
 $ cd ..
 $ catkin_make
 ```
 
-4. Run available scripts to launch
+3. Run available scripts to launch
 ```
 $ source devel/setup.bash
 $ chmod u+x ./src/scripts/home_service.sh
