@@ -42,8 +42,7 @@ $ pip install rospkg
 
 2. Clone the project in a catkin workspace
 ```
-$ mkdir catkin_ws
-$ cd catkin_ws
+$ mkdir catkin_ws && cd catkin_ws
 $ git clone https://github.com/huuanhhuynguyen/RoboND-Home-Service-Robot.git
 $ mv RoboND-Home-Service-Robot src
 $ cd src && catkin_init_workspace
@@ -51,6 +50,7 @@ $ cd src && catkin_init_workspace
 
 3. Navigate back to the `catkin_ws`folder and build the project
 ```
+$ cd ..
 $ catkin_make
 ```
 
